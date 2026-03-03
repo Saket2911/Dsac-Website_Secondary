@@ -1,8 +1,7 @@
-import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import { Clock, Flame, CheckCircle2, Play, AlertCircle } from "lucide-react";
+import { Clock, Flame, AlertCircle, Lightbulb, ExternalLink } from "lucide-react";
 
 export default function DailyQuestion() {
   return (
@@ -51,7 +50,7 @@ export default function DailyQuestion() {
               </div>
             </CardContent>
           </Card>
-          
+
           <Card className="border-border/50 shadow-sm bg-gradient-to-br from-card to-background">
             <CardContent className="pt-6">
               <div className="flex gap-3">
@@ -74,19 +73,19 @@ export default function DailyQuestion() {
                 <p>
                   Given an integer array <code>nums</code>, find the subarray with the largest sum, and return <em>its sum</em>.
                 </p>
-                
+
                 <h4 className="text-lg font-serif font-bold mt-6 mb-2">Example 1:</h4>
                 <pre className="bg-muted/50 p-4 rounded-lg border border-border/50 text-sm font-mono overflow-x-auto">
-<span className="text-muted-foreground">Input:</span> nums = [-2,1,-3,4,-1,2,1,-5,4]
-<span className="text-muted-foreground">Output:</span> 6
-<span className="text-muted-foreground">Explanation:</span> The subarray [4,-1,2,1] has the largest sum 6.
+                  <span className="text-muted-foreground">Input:</span> nums = [-2,1,-3,4,-1,2,1,-5,4]
+                  <span className="text-muted-foreground">Output:</span> 6
+                  <span className="text-muted-foreground">Explanation:</span> The subarray [4,-1,2,1] has the largest sum 6.
                 </pre>
 
                 <h4 className="text-lg font-serif font-bold mt-6 mb-2">Example 2:</h4>
                 <pre className="bg-muted/50 p-4 rounded-lg border border-border/50 text-sm font-mono overflow-x-auto">
-<span className="text-muted-foreground">Input:</span> nums = [1]
-<span className="text-muted-foreground">Output:</span> 1
-<span className="text-muted-foreground">Explanation:</span> The subarray [1] has the largest sum 1.
+                  <span className="text-muted-foreground">Input:</span> nums = [1]
+                  <span className="text-muted-foreground">Output:</span> 1
+                  <span className="text-muted-foreground">Explanation:</span> The subarray [1] has the largest sum 1.
                 </pre>
 
                 <h4 className="text-lg font-serif font-bold mt-6 mb-2">Constraints:</h4>
@@ -98,37 +97,47 @@ export default function DailyQuestion() {
             </CardContent>
           </Card>
 
-          <Card className="border-border/50 shadow-sm overflow-hidden flex flex-col">
-            <div className="bg-slate-900 text-slate-200 px-4 py-2 flex justify-between items-center text-sm font-mono border-b border-slate-800">
-              <div className="flex items-center gap-4">
-                <span>Solution.js</span>
-                <span className="px-2 py-0.5 bg-slate-800 rounded text-xs">JavaScript</span>
+          <Card className="border-border/50 shadow-sm">
+            <CardHeader className="pb-4">
+              <CardTitle className="text-xl font-serif">Approach & Hints</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-5">
+              <div className="space-y-3">
+                <div className="flex items-start gap-3 bg-primary/5 border border-primary/20 rounded-xl p-4">
+                  <Lightbulb className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                  <div>
+                    <p className="font-semibold text-foreground text-sm mb-1">Hint 1: Brute Force</p>
+                    <p className="text-sm text-muted-foreground">Try exploring all possible subarrays and computing each sum. This gives O(n²) complexity.</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3 bg-primary/5 border border-primary/20 rounded-xl p-4">
+                  <Lightbulb className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                  <div>
+                    <p className="font-semibold text-foreground text-sm mb-1">Hint 2: Kadane's Algorithm</p>
+                    <p className="text-sm text-muted-foreground">Think about maintaining a running sum. If it drops below zero, reset it. This leads to an O(n) solution.</p>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div className="relative flex-1 bg-slate-950">
-              <div className="absolute left-0 top-0 bottom-0 w-10 bg-slate-900 border-r border-slate-800 text-slate-500 font-mono text-xs text-right pr-2 pt-4 select-none">
-                1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8
+
+              <div>
+                <h4 className="text-sm font-bold text-foreground mb-3">Related Topics</h4>
+                <div className="flex flex-wrap gap-2">
+                  <Badge variant="outline" className="rounded-full">Arrays</Badge>
+                  <Badge variant="outline" className="rounded-full">Dynamic Programming</Badge>
+                  <Badge variant="outline" className="rounded-full">Divide & Conquer</Badge>
+                  <Badge variant="outline" className="rounded-full">Greedy</Badge>
+                </div>
               </div>
-              <Textarea 
-                className="w-full h-64 bg-transparent border-none text-slate-300 font-mono text-sm resize-none focus-visible:ring-0 rounded-none pl-12 pt-4"
-                defaultValue={`/**
- * @param {number[]} nums
- * @return {number}
- */
-var maxSubArray = function(nums) {
-    // Write your solution here
-    
-};`}
-              />
-            </div>
-            <CardFooter className="bg-card py-4 border-t border-border flex justify-between">
-              <Button variant="outline" className="gap-2">
-                <Play className="w-4 h-4" /> Run Tests
-              </Button>
-              <Button className="bg-primary hover:bg-secondary text-primary-foreground gap-2">
-                <CheckCircle2 className="w-4 h-4" /> Submit Solution
-              </Button>
-            </CardFooter>
+
+              <div className="border-t border-border/50 pt-5 flex flex-col sm:flex-row justify-between items-center gap-4">
+                <p className="text-sm text-muted-foreground">
+                  Solve this problem on our partnered coding platform to earn your daily XP.
+                </p>
+                <Button className="bg-primary hover:bg-secondary text-primary-foreground gap-2 rounded-full px-6 shrink-0">
+                  <ExternalLink className="w-4 h-4" /> Solve on Platform
+                </Button>
+              </div>
+            </CardContent>
           </Card>
         </div>
       </div>

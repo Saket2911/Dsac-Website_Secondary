@@ -14,12 +14,14 @@ import Quests from "@/pages/Quests";
 import Events from "@/pages/Events";
 import Resources from "@/pages/Resources";
 import Profile from "@/pages/Profile";
+import AboutDSAC from "@/pages/AboutDSAC";
 
 function Router() {
   return (
     <Layout>
       <Switch>
         <Route path="/" component={Home} />
+        <Route path="/about" component={AboutDSAC} />
         <Route path="/dashboard" component={Dashboard} />
         <Route path="/leaderboard" component={Leaderboard} />
         <Route path="/daily" component={DailyQuestion} />

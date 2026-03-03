@@ -12,16 +12,16 @@ export default function Home() {
             <span className="flex h-2 w-2 rounded-full bg-primary mr-2"></span>
             Welcome to the new platform
           </div>
-          
+
           <h1 className="text-5xl md:text-7xl font-bold leading-tight text-foreground">
-            Learn. Build. <br/>
+            Learn. Build. <br />
             <span className="text-primary italic">Elevate.</span>
           </h1>
-          
+
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl leading-relaxed">
-            The Developers Student Activity Club (DSaC) is your gateway to mastering problem-solving, collaborative coding, and building a strong technical mindset.
+            The Data Structures and Algorithms Club (DSAC) is your gateway to mastering problem-solving, collaborative coding, and building a strong technical mindset.
           </p>
-          
+
           <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mt-4">
             <Button size="lg" className="bg-primary hover:bg-secondary text-white rounded-full px-8 h-14 text-base shadow-[0_4px_20px_rgba(198,167,94,0.3)] hover:shadow-[0_8px_30px_rgba(168,137,61,0.4)] transition-all">
               Join the Community
@@ -33,13 +33,13 @@ export default function Home() {
             </Link>
           </div>
         </div>
-        
+
         <div className="flex-1 relative flex justify-center">
           <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent blur-3xl rounded-full w-3/4 h-3/4 m-auto -z-10 animate-pulse" style={{ animationDuration: '4s' }}></div>
-          <img 
-            src="/dsac-logo.png" 
-            alt="DSaC Large Logo" 
-            className="w-64 h-64 md:w-96 md:h-96 object-contain drop-shadow-[0_20px_50px_rgba(198,167,94,0.2)]" 
+          <img
+            src="/dsac-logo.png"
+            alt="DSaC Large Logo"
+            className="w-64 h-64 md:w-96 md:h-96 object-contain drop-shadow-[0_20px_50px_rgba(198,167,94,0.2)]"
           />
         </div>
       </section>
@@ -103,8 +103,8 @@ export default function Home() {
               desc: "Access a curated collection of roadmaps, tutorials, and cheat sheets."
             }
           ].map((feature, idx) => (
-            <div 
-              key={idx} 
+            <div
+              key={idx}
               className="bg-card/50 border border-border/50 rounded-2xl p-8 hover:bg-card hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group"
             >
               <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
@@ -116,12 +116,12 @@ export default function Home() {
           ))}
         </div>
       </section>
-      
+
       {/* CTA Section */}
       <section className="py-24 bg-secondary rounded-3xl px-8 text-center text-secondary-foreground relative overflow-hidden mt-10">
         <div className="absolute top-0 right-0 w-64 h-64 bg-primary rounded-full mix-blend-multiply filter blur-3xl opacity-50"></div>
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-white rounded-full mix-blend-overlay filter blur-3xl opacity-20"></div>
-        
+
         <div className="relative z-10 max-w-3xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">Ready to start your journey?</h2>
           <p className="text-lg md:text-xl text-white/80 mb-10">

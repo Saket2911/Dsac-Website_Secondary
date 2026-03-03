@@ -1,5 +1,5 @@
 import { Link, useLocation } from "wouter";
-import { Menu, X, User, Trophy, Code, Target, Calendar, FolderOpen, LayoutDashboard } from "lucide-react";
+import { Menu, X, User, Trophy, Code, Target, Calendar, FolderOpen, LayoutDashboard, Info } from "lucide-react";
 import { useState } from "react";
 import { Button } from "./ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "./ui/dropdown-menu";
@@ -10,6 +10,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
   const navLinks = [
     { name: "Home", path: "/" },
+    { name: "About", path: "/about", icon: <Info className="w-4 h-4 mr-2" /> },
     { name: "Dashboard", path: "/dashboard", icon: <LayoutDashboard className="w-4 h-4 mr-2" /> },
     { name: "Daily", path: "/daily", icon: <Code className="w-4 h-4 mr-2" /> },
     { name: "Leaderboard", path: "/leaderboard", icon: <Trophy className="w-4 h-4 mr-2" /> },
@@ -28,7 +29,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
               <img src="/dsac-logo.png" alt="DSaC Logo" className="h-12 w-12 object-contain" />
               <div className="flex flex-col">
                 <span className="font-serif text-xl font-bold text-primary leading-none">DSaC</span>
-                <span className="text-[10px] uppercase tracking-wider text-muted-foreground hidden sm:block">Developers Student Activity Club</span>
+                <span className="text-[10px] uppercase tracking-wider text-muted-foreground hidden sm:block">Data Structures and Algorithms Club</span>
               </div>
             </a>
           </Link>
@@ -38,9 +39,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
             {navLinks.map((link) => (
               <Link key={link.path} href={link.path}>
                 <a
-                  className={`text-sm font-medium transition-colors hover:text-primary flex items-center ${
-                    location === link.path ? "text-primary border-b-2 border-primary py-1" : "text-foreground/70"
-                  }`}
+                  className={`text-sm font-medium transition-colors hover:text-primary flex items-center ${location === link.path ? "text-primary border-b-2 border-primary py-1" : "text-foreground/70"
+                    }`}
                 >
                   {link.name}
                 </a>
@@ -98,9 +98,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 <Link key={link.path} href={link.path}>
                   <a
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className={`text-base font-medium px-4 py-3 rounded-lg transition-colors flex items-center ${
-                      location === link.path ? "bg-primary/10 text-primary" : "text-foreground/70 hover:bg-card hover:text-foreground"
-                    }`}
+                    className={`text-base font-medium px-4 py-3 rounded-lg transition-colors flex items-center ${location === link.path ? "bg-primary/10 text-primary" : "text-foreground/70 hover:bg-card hover:text-foreground"
+                      }`}
                   >
                     {link.icon} {link.name}
                   </a>
@@ -110,9 +109,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
               <Link href="/profile">
                 <a
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={`text-base font-medium px-4 py-3 rounded-lg transition-colors flex items-center ${
-                    location === "/profile" ? "bg-primary/10 text-primary" : "text-foreground/70 hover:bg-card hover:text-foreground"
-                  }`}
+                  className={`text-base font-medium px-4 py-3 rounded-lg transition-colors flex items-center ${location === "/profile" ? "bg-primary/10 text-primary" : "text-foreground/70 hover:bg-card hover:text-foreground"
+                    }`}
                 >
                   <User className="w-4 h-4 mr-2" /> Profile
                 </a>
