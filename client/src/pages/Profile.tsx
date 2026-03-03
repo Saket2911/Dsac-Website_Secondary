@@ -17,10 +17,10 @@ export default function Profile() {
           {/* Abstract pattern bg */}
           <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, hsl(var(--primary)) 1px, transparent 0)', backgroundSize: '24px 24px' }}></div>
         </div>
-        
+
         <div className="absolute -bottom-12 left-8 md:left-12 flex items-end gap-6">
           <div className="relative">
-            <Avatar className="h-28 w-28 md:h-32 md:w-32 border-4 border-background shadow-xl">
+            <Avatar className="h-28 w-28 md:h-32 md:w-32 border-4 border-background bg-background shadow-xl">
               <AvatarFallback className="bg-primary/10 text-primary text-4xl font-serif">AJ</AvatarFallback>
             </Avatar>
             <button className="absolute bottom-0 right-0 p-2 rounded-full bg-primary text-white shadow-md hover:bg-secondary transition-colors">
@@ -34,7 +34,7 @@ export default function Profile() {
             </p>
           </div>
         </div>
-        
+
         <div className="absolute bottom-4 right-8 flex gap-3">
           <Button variant="outline" className="bg-background/80 backdrop-blur text-foreground border-border/50 gap-2">
             <Settings className="w-4 h-4" /> Settings
@@ -101,26 +101,26 @@ export default function Profile() {
         <div className="lg:col-span-2">
           <Tabs defaultValue="achievements" className="w-full">
             <TabsList className="w-full flex justify-start bg-transparent border-b border-border rounded-none h-auto p-0 gap-6">
-              <TabsTrigger 
-                value="achievements" 
+              <TabsTrigger
+                value="achievements"
                 className="data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none px-2 py-3 font-medium text-base"
               >
                 Achievements
               </TabsTrigger>
-              <TabsTrigger 
-                value="history" 
+              <TabsTrigger
+                value="history"
                 className="data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none px-2 py-3 font-medium text-base"
               >
                 Activity History
               </TabsTrigger>
-              <TabsTrigger 
-                value="edit" 
+              <TabsTrigger
+                value="edit"
                 className="data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none px-2 py-3 font-medium text-base ml-auto"
               >
                 Edit Profile
               </TabsTrigger>
             </TabsList>
-            
+
             <TabsContent value="achievements" className="pt-6 space-y-6">
               <div>
                 <h3 className="text-xl font-serif font-bold text-foreground mb-4">Badges Earned (5)</h3>
@@ -140,7 +140,7 @@ export default function Profile() {
                       <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{badge.desc}</p>
                     </div>
                   ))}
-                  
+
                   {/* Locked badge placeholder */}
                   <div className="bg-muted/30 border border-border/30 border-dashed rounded-2xl p-4 text-center opacity-60">
                     <div className="w-16 h-16 rounded-full bg-muted mx-auto flex items-center justify-center text-xl mb-3">
@@ -151,7 +151,7 @@ export default function Profile() {
                 </div>
               </div>
             </TabsContent>
-            
+
             <TabsContent value="history" className="pt-6">
               <Card className="border-border/50 shadow-sm">
                 <CardContent className="p-0">
@@ -165,12 +165,11 @@ export default function Profile() {
                     ].map((item, i) => (
                       <div key={i} className="p-4 sm:p-6 flex items-center justify-between hover:bg-muted/20 transition-colors">
                         <div className="flex items-center gap-4">
-                          <div className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 ${
-                            item.type === 'problem' ? 'bg-blue-100 text-blue-600' :
-                            item.type === 'quest' ? 'bg-purple-100 text-purple-600' :
-                            item.type === 'contest' ? 'bg-orange-100 text-orange-600' :
-                            'bg-yellow-100 text-yellow-600'
-                          }`}>
+                          <div className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 ${item.type === 'problem' ? 'bg-blue-100 text-blue-600' :
+                              item.type === 'quest' ? 'bg-purple-100 text-purple-600' :
+                                item.type === 'contest' ? 'bg-orange-100 text-orange-600' :
+                                  'bg-yellow-100 text-yellow-600'
+                            }`}>
                             {item.type === 'problem' && <Code className="w-5 h-5" />}
                             {item.type === 'quest' && <Target className="w-5 h-5" />}
                             {item.type === 'contest' && <Trophy className="w-5 h-5" />}
@@ -188,7 +187,7 @@ export default function Profile() {
                 </CardContent>
               </Card>
             </TabsContent>
-            
+
             <TabsContent value="edit" className="pt-6">
               <Card className="border-border/50 shadow-sm">
                 <CardHeader>
@@ -214,7 +213,7 @@ export default function Profile() {
                       <Input id="year" defaultValue="Year 3" />
                     </div>
                   </div>
-                  
+
                   <div className="space-y-2 pt-4 border-t border-border/40">
                     <Label htmlFor="github">GitHub Profile URL</Label>
                     <Input id="github" defaultValue="https://github.com/alexj" />
@@ -223,14 +222,14 @@ export default function Profile() {
                     <Label htmlFor="linkedin">LinkedIn Profile URL</Label>
                     <Input id="linkedin" defaultValue="https://linkedin.com/in/alexjohnson" />
                   </div>
-                  
+
                   <div className="flex justify-end gap-4 pt-6">
                     <Button variant="outline">Cancel</Button>
                     <Button className="bg-primary hover:bg-secondary text-white">Save Changes</Button>
                   </div>
                 </CardContent>
               </Card>
-              
+
               <div className="mt-8 flex justify-center">
                 <Button variant="ghost" className="text-destructive hover:bg-destructive/10 hover:text-destructive gap-2">
                   <LogOut className="w-4 h-4" /> Sign Out
