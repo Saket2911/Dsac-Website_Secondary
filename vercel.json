@@ -9,43 +9,42 @@
       }
     },
     {
-      "src": "api/index.js",
+      "src": "backend/index.js",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/api/index.js"
+      "dest": "/backend/index.js"
     },
     {
       "src": "/auth/(.*)",
-      "dest": "/api/index.js"
+      "dest": "/backend/index.js"
     },
     {
       "src": "/contests/(.*)",
-      "dest": "/api/index.js"
+      "dest": "/backend/index.js"
     },
     {
       "src": "/leaderboard/(.*)",
-      "dest": "/api/index.js"
+      "dest": "/backend/index.js"
     },
     {
       "src": "/daily-question/(.*)",
-      "dest": "/api/index.js"
+      "dest": "/backend/index.js"
     },
     {
       "src": "/user/(.*)",
-      "dest": "/api/index.js"
+      "dest": "/backend/index.js"
     },
     {
       "src": "/uploads/(.*)",
-      "dest": "/api/index.js"
+      "dest": "/backend/index.js"
     },
     {
       "src": "/(.*)",
       "dest": "/index.html"
     }
   ]
-}</content>
-<parameter name="filePath">f:\Projects\Dsac_in_javaScript\vercel.json
+}
