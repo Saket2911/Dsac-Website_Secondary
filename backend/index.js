@@ -8,6 +8,7 @@ import morgan from "morgan";
 import cors from "cors";
 
 import apiRouter from "./routes/apiRouter.js";
+import authRoutes from "./routes/authRoutes.js";
 import { startDailyQuestionJob } from "./cronJobs/dailyQuestionCron.js";
 
 import connectDB from "./config/db.js";
@@ -47,9 +48,8 @@ app.use("/uploads", express.static(uploadsDir));
 
 // Routes
 // All functional routes are consolidated under /api for frontend compatibility and organizational clarity
+app.use("/api/auth", authRoutes);
 app.use("/api", apiRouter);
-
-
 // Root Health Check
 app.get("/", (req, res) => {
   res.json({ message: "DSAC Backend API is running", version: "1.0.0" });

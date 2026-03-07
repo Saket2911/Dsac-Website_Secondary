@@ -19,10 +19,6 @@
       "dest": "/backend/index.js"
     },
     {
-      "src": "/auth/(.*)",
-      "dest": "/backend/index.js"
-    },
-    {
       "src": "/contests/(.*)",
       "dest": "/backend/index.js"
     },
