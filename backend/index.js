@@ -22,9 +22,8 @@ if (!fs.existsSync(uploadsDir)) {
   fs.mkdirSync(uploadsDir, { recursive: true });
 }
 
-await connectDB();
-
 // Start cron jobs (daily question generation + auto-detect solvers)
+// In production Vercel, this won't actually trigger periodically due to sleeping instances
 startDailyQuestionJob();
 
 const app = express();
@@ -42,6 +41,17 @@ app.use(cors({
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true
 }));
+
+// Serverless DB Connection Middleware
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (error) {
+    console.error("Database connection error in middleware:", error);
+    res.status(500).json({ error: "Database Connection Failed. Ensure IP is Allowlisted in MongoDB Atlas and MONGODB_URI is correct." });
+  }
+});
 
 // Static Files
 app.use("/uploads", express.static(uploadsDir));
