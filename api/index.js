@@ -16,6 +16,8 @@ import leaderboardRoutes from './routes/leaderboardRoutes.js';
 import connectDB from "./config/db.js";
 import cors from "cors";
 
+await connectDB();
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -30,7 +32,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: true, // Allow all origins
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"]
 }));
@@ -48,9 +50,9 @@ app.use("/user", userRoutes);
 
 const port = process.env.PORT || 3001;
 
-app.listen(port, async () => {
-  await connectDB();
-  console.log(`Server running on http://localhost:${port}`);
-});
+// app.listen(port, async () => {
+//   await connectDB();
+//   console.log(`Server running on http://localhost:${port}`);
+// });
 
 export default app;
