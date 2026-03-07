@@ -13,6 +13,7 @@ import contestRoutes from "./routes/contestRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import dailyQuestionRoutes from "./routes/dailyQuestionRoutes.js";
 import leaderboardRoutes from "./routes/leaderboardRoutes.js";
+import { startDailyQuestionJob } from "./cronJobs/dailyQuestionCron.js";
 
 import connectDB from "./config/db.js";
 
@@ -26,6 +27,9 @@ if (!fs.existsSync(uploadsDir)) {
 }
 
 await connectDB();
+
+// Start cron jobs (daily question generation + auto-detect solvers)
+startDailyQuestionJob();
 
 const app = express();
 
@@ -69,5 +73,12 @@ app.use((err, req, res, next) => {
     }
   });
 });
+
+const port = process.env.PORT || 3001;
+if (process.env.NODE_ENV !== "production") {
+  app.listen(port, () => {
+    console.log(`🚀 Server running on http://localhost:${port}`);
+  });
+}
 
 export default app;

@@ -81,49 +81,71 @@ export const getProfile = async (req, res) => {
 export const getStats = async (req, res) => {
   try {
     const user = req.user;
-    const stats = {};
+    const cache = user.statsCache || {};
+    const lastUpdated = cache.lastUpdated ? new Date(cache.lastUpdated) : null;
+    const CACHE_TTL_MS = 30 * 60 * 1000; // 30 minutes
 
-    // Fetch live stats from each platform if ID is provided
+    // If cache is fresh, return it immediately without hammering external APIs
+    if (lastUpdated && (Date.now() - lastUpdated.getTime()) < CACHE_TTL_MS) {
+      return res.json({
+        stats: cache,
+        cachedAt: lastUpdated,
+        fromCache: true
+      });
+    }
+
+    const stats = {};
     const promises = [];
     if (user.platformIds.leetcodeId) {
       promises.push(fetchLeetCodeStats(user.platformIds.leetcodeId).then(data => {
         if (data) stats.leetcode = data;
+      }).catch(() => {
+        // Fall back to cached leetcode if available
+        if (cache.leetcode) stats.leetcode = cache.leetcode;
       }));
     }
     if (user.platformIds.codeforcesId) {
       promises.push(fetchCodeforcesStats(user.platformIds.codeforcesId).then(data => {
         if (data) stats.codeforces = data;
+      }).catch(() => {
+        if (cache.codeforces) stats.codeforces = cache.codeforces;
       }));
     }
     if (user.platformIds.codechefId) {
       promises.push(fetchCodeChefStats(user.platformIds.codechefId).then(data => {
         if (data) stats.codechef = data;
+      }).catch(() => {
+        if (cache.codechef) stats.codechef = cache.codechef;
       }));
     }
     if (user.platformIds.hackerrankId) {
       promises.push(fetchHackerRankStats(user.platformIds.hackerrankId).then(data => {
         if (data) stats.hackerrank = data;
+      }).catch(() => {
+        if (cache.hackerrank) stats.hackerrank = cache.hackerrank;
       }));
     }
     await Promise.allSettled(promises);
 
-    // Update cache
-    user.statsCache = {
-      ...stats,
-      lastUpdated: new Date()
-    };
-    await user.save();
+    // Only update cache if we got at least some data
+    if (Object.keys(stats).length > 0) {
+      user.statsCache = { ...stats, lastUpdated: new Date() };
+      await user.save();
+    }
+
+    // If live fetch returned nothing and we have cache, return cache
+    const finalStats = Object.keys(stats).length > 0 ? stats : cache;
     res.json({
-      stats,
-      cachedAt: new Date()
+      stats: finalStats,
+      cachedAt: user.statsCache?.lastUpdated || new Date(),
+      fromCache: Object.keys(stats).length === 0
     });
   } catch (error) {
     console.error("Get stats error:", error);
-    res.status(500).json({
-      message: "Server error fetching stats"
-    });
+    res.status(500).json({ message: "Server error fetching stats" });
   }
 };
+
 
 // Upload profile image
 export const uploadProfileImage = async (req, res) => {

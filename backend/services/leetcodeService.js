@@ -1,8 +1,16 @@
 import axios from "axios";
 const LEETCODE_GRAPHQL_URL = "https://leetcode.com/graphql";
+
+// Headers that mimic a real browser to avoid LeetCode bot detection
+const LC_HEADERS = {
+  "Content-Type": "application/json",
+  "Referer": "https://leetcode.com",
+  "Origin": "https://leetcode.com",
+  "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+};
+
 export async function fetchLeetCodeStats(username) {
   try {
-    // Fetch problem stats
     const problemQuery = {
       query: `
         query getUserProfile($username: String!) {
@@ -16,15 +24,11 @@ export async function fetchLeetCodeStats(username) {
           }
         }
       `,
-      variables: {
-        username
-      }
+      variables: { username }
     };
     const problemResponse = await axios.post(LEETCODE_GRAPHQL_URL, problemQuery, {
-      headers: {
-        "Content-Type": "application/json"
-      },
-      timeout: 10000
+      headers: LC_HEADERS,
+      timeout: 12000
     });
     const acStats = problemResponse.data?.data?.matchedUser?.submitStatsGlobal?.acSubmissionNum;
     if (!acStats) return null;
@@ -43,18 +47,14 @@ export async function fetchLeetCodeStats(username) {
           }
         }
       `,
-      variables: {
-        username
-      }
+      variables: { username }
     };
     let contestRating = 0;
     let contestRanking = 0;
     try {
       const contestResponse = await axios.post(LEETCODE_GRAPHQL_URL, contestQuery, {
-        headers: {
-          "Content-Type": "application/json"
-        },
-        timeout: 10000
+        headers: LC_HEADERS,
+        timeout: 12000
       });
       const contestData = contestResponse.data?.data?.userContestRanking;
       if (contestData) {
@@ -77,6 +77,7 @@ export async function fetchLeetCodeStats(username) {
     return null;
   }
 }
+
 export async function checkLeetCodeProblemSolved(username, problemSlug) {
   try {
     // Use the recentAcSubmissionList query which only returns accepted submissions
